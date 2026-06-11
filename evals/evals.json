@@ -1,0 +1,70 @@
+{
+  "skill_name": "legitimate-interest",
+  "description": "Iteration-1 benchmark set for the GDPR Legitimate Interest Assessment (LIA) skill. Four realistic practitioner scenarios spanning the skill's high-stakes coverage: AI training on scraped data, B2B direct marketing, employee monitoring, and credit-scoring profiling. Each tests whether the skill produces a properly structured, citation-grounded EDPB three-step LIA versus a no-skill baseline.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "ai-training-scraped-data",
+      "prompt": "We're a European startup building a customer-service AI. We want to fine-tune an open-source LLM on a few million product reviews and forum posts we scraped from public websites — names and usernames are sometimes included. Can we rely on legitimate interest as our legal basis under GDPR for the training, and what exactly do we need to document? We really don't want to ask millions of people for consent.",
+      "expected_output": "A structured Art. 6(1)(f) Legitimate Interest Assessment applying the EDPB three-step test, grounded in EDPB Opinion 28/2024 (AI models) and CNIL's June 2025 AI/web-scraping guidance, addressing necessity, the data subjects' reasonable expectations for scraped public data, minimisation/anonymisation, and the right to object — reaching a documented, defensible conclusion (with conditions) rather than a flat yes/no.",
+      "files": [],
+      "assertions": [
+        "Identifies GDPR Art. 6(1)(f) (legitimate interest) as the legal basis being assessed",
+        "Applies the EDPB three-step test as distinct steps: (1) identifying the legitimate interest / purpose, (2) necessity, (3) balancing against the data subjects' interests and rights",
+        "Cites EDPB Guidelines 1/2024 on Art. 6(1)(f) as the core interpretive source",
+        "Cites EDPB Opinion 28/2024 on AI models (and/or CNIL's 2025 AI/web-scraping guidance) for the AI-training context",
+        "Addresses web-scraping / public-source specifics: reasonable expectations of data subjects and data minimisation or anonymisation/pseudonymisation",
+        "Addresses the data subject's right to object under Art. 21",
+        "Reaches a documented, reasoned conclusion suitable for an accountability record (conditional/qualified rather than an unsupported yes/no)"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "b2b-direct-marketing",
+      "prompt": "I run marketing at a B2B SaaS company in Germany. We want to email people at companies that fit our ideal customer profile — we got their work email addresses from LinkedIn and a data vendor. Sales keeps telling me we can use 'legitimate interest' instead of consent. Is that right, and how do we make it defensible? And what do we do about people who don't want our emails?",
+      "expected_output": "An LIA for direct marketing under Art. 6(1)(f) that applies the three-step test, invokes Recital 47 (direct marketing may be a legitimate interest), and crucially flags that GDPR legitimate interest does NOT displace the ePrivacy/electronic-marketing consent regime (German UWG § 7 / ePrivacy), and handles the absolute right to object to direct-marketing processing under Art. 21(2)-(3).",
+      "files": [],
+      "assertions": [
+        "Identifies GDPR Art. 6(1)(f) (legitimate interest) as the legal basis being assessed",
+        "Applies the EDPB three-step test as distinct steps (legitimate interest / purpose, necessity, balancing)",
+        "Cites EDPB Guidelines 1/2024 on Art. 6(1)(f) as the core interpretive source",
+        "Notes Recital 47 (processing for direct marketing purposes may be regarded as a legitimate interest)",
+        "Flags that GDPR legitimate interest does not override the ePrivacy / electronic direct-marketing rules (e.g. ePrivacy Directive / German UWG § 7), so consent may still be required for the email channel itself",
+        "Addresses the right to object to direct marketing under Art. 21(2)-(3) (absolute, must be honoured)",
+        "Reaches a documented, reasoned conclusion suitable for an accountability record rather than an unsupported yes/no"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "employee-monitoring",
+      "prompt": "We're rolling out endpoint monitoring software across our workforce (about 800 employees across the EU) to detect data exfiltration and fraud. Our DPO says we need a legitimate interest assessment before we deploy. Can you help me work through whether legitimate interest holds up here, given that it's our own employees being monitored?",
+      "expected_output": "An LIA for employee monitoring under Art. 6(1)(f) applying the three-step test with explicit attention to the employer–employee power imbalance and employees' reasonable expectations (heightened balancing), strict necessity/proportionality (least-intrusive means, scope limits), transparency, and the employment-context overlay (Art. 88 / national employment-data law such as German BDSG § 26), reaching a conditional documented conclusion.",
+      "files": [],
+      "assertions": [
+        "Identifies GDPR Art. 6(1)(f) (legitimate interest) as the legal basis being assessed",
+        "Applies the EDPB three-step test as distinct steps (legitimate interest / purpose, necessity, balancing)",
+        "Cites EDPB Guidelines 1/2024 on Art. 6(1)(f) as the core interpretive source",
+        "Explicitly flags the employer–employee power imbalance and/or employees' reasonable expectations as a factor that raises the bar in the balancing test",
+        "Stresses strict necessity and proportionality (least-intrusive means, scope/retention limits) rather than blanket monitoring",
+        "Addresses the employment-context overlay (Art. 88 GDPR and/or national employment-data rules such as German BDSG § 26) or the role of transparency/works-council where relevant",
+        "Reaches a documented, reasoned conclusion suitable for an accountability record rather than an unsupported yes/no"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "credit-scoring-profiling",
+      "prompt": "At our fintech we want to use legitimate interest to run credit-risk profiling on loan applicants, combining their application data with third-party data. Is legitimate interest the right basis for this kind of profiling, or do we need something else? And what are the risks if a regulator or court challenges it?",
+      "expected_output": "An LIA for credit-risk profiling under Art. 6(1)(f) applying the three-step test, addressing the profiling / automated-decision-making interface (Art. 22), the heightened scrutiny of credit scoring (e.g. CJEU SCHUFA, C-634/21), the contract-vs-legitimate-interest basis question, transparency and the right to object, and the regulatory-challenge risks — reaching a documented, qualified conclusion.",
+      "files": [],
+      "assertions": [
+        "Identifies GDPR Art. 6(1)(f) (legitimate interest) as the legal basis being assessed, and weighs whether it is appropriate versus an alternative basis (e.g. contract / legal obligation)",
+        "Applies the EDPB three-step test as distinct steps (legitimate interest / purpose, necessity, balancing)",
+        "Cites EDPB Guidelines 1/2024 on Art. 6(1)(f) as the core interpretive source",
+        "Addresses the profiling / automated-decision-making interface under Art. 22 (and any additional safeguards it triggers)",
+        "References the heightened regulatory/judicial scrutiny of credit scoring (e.g. CJEU SCHUFA C-634/21) or equivalent enforcement risk",
+        "Addresses transparency and the data subject's right to object under Art. 21",
+        "Reaches a documented, reasoned conclusion suitable for an accountability record rather than an unsupported yes/no"
+      ]
+    }
+  ]
+}

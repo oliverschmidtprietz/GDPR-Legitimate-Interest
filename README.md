@@ -1,5 +1,7 @@
 # Legitimate Interest (GDPR Art. 6(1)(f) LIA) — Deployment Guide
 
+> 📄 **[View the interactive skill page →](https://oliverschmidtprietz.github.io/GDPR-Legitimate-Interest/)**
+
 GDPR **Legitimate Interest Assessment** skill for Claude — guides a structured Art. 6(1)(f) assessment
 using the EDPB three-step test and produces a documented LIA suitable for accountability records.
 

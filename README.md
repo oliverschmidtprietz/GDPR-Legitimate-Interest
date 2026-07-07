@@ -44,8 +44,7 @@ mechanism). The skill activates on legitimate-interest / Art. 6(1)(f) / "Interes
 
 ## Version History
 
-See [CHANGELOG.md](CHANGELOG.md). Current status: **pre-review (v0.9)** — pending the iteration-1
-eval benchmark to promote to v1.0. Already published on [lawve.ai](https://lawve.ai/en/skills/legitimate-interest-oliver-schmidt-prietz).
+See [CHANGELOG.md](CHANGELOG.md) — the only place version history lives. Current version and status: see the `SKILL.md` frontmatter and the root README Skill Register. Also published on [lawve.ai](https://lawve.ai/en/skills/legitimate-interest-oliver-schmidt-prietz).
 
 ## License
 

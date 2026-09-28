@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-09-24T00:00:00Z",
+  "assessment": {
+    "id": "proc-speculative-resale",
+    "label": "Speculative resale of visitor data to unnamed future partners"
+  },
+  "step1": {
+    "verdict": "fail",
+    "lawful": true,
+    "articulated": false,
+    "real_and_present": false
+  },
+  "overall": {
+    "li_appropriate": "yes",
+    "confidence": "low"
+  },
+  "gaps": [],
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

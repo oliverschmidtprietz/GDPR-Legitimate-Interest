@@ -24,16 +24,21 @@ skills/legitimate-interest/
 ├── SKILL.md                              # Main skill instructions (deploy this)
 ├── CHANGELOG.md                          # Version history
 ├── README.md                             # This file
-└── references/
-    ├── step1-legitimate-interest.md      # Step 1 — identifying the legitimate interest
-    ├── step2-necessity.md                # Step 2 — necessity / data minimisation
-    ├── step3-balancing.md                # Step 3 — balancing test
-    ├── context-modules.md                # Context-specific modules (marketing, fraud, AI training, …)
-    ├── cjeu-case-law.md                  # Key CJEU holdings
-    ├── oss-enforcement-practice.md       # EDPB OSS Case Digest — enforcement patterns
-    ├── additional-regulatory-sources.md  # EDPB Opinion 28/2024, CNIL AI, ICO/DUA Act
-    ├── data-subject-rights.md            # Right to object (Art. 21) and related rights
-    └── jurisdiction-notes.md             # EU / UK / FR / DE notes
+├── conformance.json                      # Portfolio standard conformance declaration (tier: structural)
+├── sources.lock.json                     # Per-file source verification manifest
+├── references/
+│   ├── legitimate-interest-sidecar-schema.json  # Native machine-readable sidecar schema
+│   ├── step1-legitimate-interest.md      # Step 1 — identifying the legitimate interest
+│   ├── step2-necessity.md                # Step 2 — necessity / data minimisation
+│   ├── step3-balancing.md                # Step 3 — balancing test
+│   ├── context-modules.md                # Context-specific modules (marketing, fraud, AI training, …)
+│   ├── cjeu-case-law.md                  # Key CJEU holdings
+│   ├── oss-enforcement-practice.md       # EDPB OSS Case Digest — enforcement patterns
+│   ├── additional-regulatory-sources.md  # EDPB Opinion 28/2024, CNIL AI, ICO/DUA Act
+│   ├── data-subject-rights.md            # Right to object (Art. 21) and related rights
+│   └── jurisdiction-notes.md             # EU / UK / FR / DE notes
+├── validator/                            # Deterministic structural validator (validate.py + lia_validator/)
+└── tests/                                # pytest suite for the validator
 ```
 
 ## Deploy

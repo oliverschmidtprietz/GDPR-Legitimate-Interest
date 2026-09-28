@@ -185,4 +185,4 @@ The ICO has published guidance on AI and data protection, including on legal bas
 | Video surveillance | MEDIUM — national guidance varies |
 | Children's data | MEDIUM — age thresholds may differ (Art. 8 consent: 13-16 years depending on MS) |
 | Credit scoring | HIGH — national rules supplement GDPR (esp. DE, FR) |
-| Public sector | HIGH — national law determines scope of Art. 6(1) second indent |
+| Public sector | HIGH — national law determines scope of Art. 6(1) second subparagraph |

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-09-24T00:00:00Z",
+  "assessment": {
+    "id": "proc-newsletter-analytics",
+    "label": "Weekly newsletter open/click analytics"
+  },
+  "step1": {
+    "verdict": "maybe"
+  },
+  "overall": {
+    "li_appropriate": "yes",
+    "confidence": "high"
+  },
+  "gaps": [],
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

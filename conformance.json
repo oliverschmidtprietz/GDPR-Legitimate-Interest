@@ -1,0 +1,12 @@
+{
+  "conformance_schema_version": "1.1",
+  "skill": "legitimate-interest",
+  "standard_version": "1.4",
+  "tier": "structural",
+  "validator": "validator/validate.py",
+  "artefact_schema": "references/legitimate-interest-sidecar-schema.json",
+  "sources_lock": "sources.lock.json",
+  "emits_core_artefact": true,
+  "emit_check_input": "validator/fixtures/must_pass/minimal-clean.json",
+  "declared_at": "2026-09-24"
+}

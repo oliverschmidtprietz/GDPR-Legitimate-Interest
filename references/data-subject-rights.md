@@ -100,7 +100,7 @@ While verifying whether compelling grounds exist:
 - Data subject objects → processing for direct marketing **must cease**
 - **No balancing test** — no "compelling legitimate grounds" defence
 - Applies regardless of whether the initial LIA was valid
-- Includes profiling to the extent related to direct marketing (Art. 21(3))
+- Includes profiling to the extent related to direct marketing (Art. 21(2))
 
 ### Information Obligation (Art. 21(4))
 

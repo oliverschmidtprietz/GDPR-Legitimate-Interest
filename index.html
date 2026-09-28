@@ -811,8 +811,8 @@ body {
 
     <section class="hero">
         <div class="badges">
-            <div class="badge badge--live">LIVE · v1.0 STABLE</div>
-            <div class="badge">BUILD 2026.06.11</div>
+            <div class="badge badge--live">LIVE · v1.2 STABLE</div>
+            <div class="badge">BUILD 2026.09.24</div>
             <div class="badge badge--color">ART. 6(1)(F)</div>
             <div class="badge">AGPL-3.0 · 4 EVAL CASES · 0 ASSERTIONS</div>
         </div>
@@ -1001,13 +1001,34 @@ body {
 │   ├── context-modules.md
 │   ├── data-subject-rights.md
 │   ├── jurisdiction-notes.md
+│   ├── legitimate-interest-sidecar-schema.json
 │   ├── oss-enforcement-practice.md
 │   ├── step1-legitimate-interest.md
 │   ├── step2-necessity.md
 │   └── step3-balancing.md
+├── tests
+│   ├── conftest.py
+│   ├── test_emit_core_artefact.py
+│   ├── test_emit_core_artefact_malformed.py
+│   ├── test_rules.py
+│   └── test_schema_selfvalid.py
+├── validator
+│   ├── fixtures
+│   │   ├── must_fail
+│   │   └── must_pass
+│   ├── lia_validator
+│   │   ├── rules
+│   │   ├── __init__.py
+│   │   ├── core_artefact.py
+│   │   ├── findings.py
+│   │   ├── registry.py
+│   │   └── runner.py
+│   └── validate.py
 ├── CHANGELOG.md  <span class="comment"># Version history</span>
 ├── README.md  <span class="comment"># Deployment guide</span>
-└── SKILL.md  <span class="comment"># Main skill instructions</span></pre>
+├── SKILL.md  <span class="comment"># Main skill instructions</span>
+├── conformance.json
+└── sources.lock.json</pre>
         </div>
     </div>
 
@@ -1226,16 +1247,21 @@ using the EDPB three-step test and produces a documented LIA suitable for accoun
 ├── SKILL.md                              # Main skill instructions (deploy this)
 ├── CHANGELOG.md                          # Version history
 ├── README.md                             # This file
-└── references/
-    ├── step1-legitimate-interest.md      # Step 1 — identifying the legitimate interest
-    ├── step2-necessity.md                # Step 2 — necessity / data minimisation
-    ├── step3-balancing.md                # Step 3 — balancing test
-    ├── context-modules.md                # Context-specific modules (marketing, fraud, AI training, …)
-    ├── cjeu-case-law.md                  # Key CJEU holdings
-    ├── oss-enforcement-practice.md       # EDPB OSS Case Digest — enforcement patterns
-    ├── additional-regulatory-sources.md  # EDPB Opinion 28/2024, CNIL AI, ICO/DUA Act
-    ├── data-subject-rights.md            # Right to object (Art. 21) and related rights
-    └── jurisdiction-notes.md             # EU / UK / FR / DE notes
+├── conformance.json                      # Portfolio standard conformance declaration (tier: structural)
+├── sources.lock.json                     # Per-file source verification manifest
+├── references/
+│   ├── legitimate-interest-sidecar-schema.json  # Native machine-readable sidecar schema
+│   ├── step1-legitimate-interest.md      # Step 1 — identifying the legitimate interest
+│   ├── step2-necessity.md                # Step 2 — necessity / data minimisation
+│   ├── step3-balancing.md                # Step 3 — balancing test
+│   ├── context-modules.md                # Context-specific modules (marketing, fraud, AI training, …)
+│   ├── cjeu-case-law.md                  # Key CJEU holdings
+│   ├── oss-enforcement-practice.md       # EDPB OSS Case Digest — enforcement patterns
+│   ├── additional-regulatory-sources.md  # EDPB Opinion 28/2024, CNIL AI, ICO/DUA Act
+│   ├── data-subject-rights.md            # Right to object (Art. 21) and related rights
+│   └── jurisdiction-notes.md             # EU / UK / FR / DE notes
+├── validator/                            # Deterministic structural validator (validate.py + lia_validator/)
+└── tests/                                # pytest suite for the validator
 </code></pre>
 <h2>Deploy</h2>
 <p>Copy <code>SKILL.md</code> and <code>references/</code> to your Claude skills directory (or install via your platform's skill
@@ -1249,7 +1275,7 @@ mechanism). The skill activates on legitimate-interest / Art. 6(1)(f) / "Interes
     </section>
 
     <footer class="page-footer">
-        <span class="footer-text">onezero.legal · /SKILLS/LEGITIMATE.INTEREST · v1.0</span>
+        <span class="footer-text">onezero.legal · /SKILLS/LEGITIMATE.INTEREST · v1.2</span>
         <nav class="footer-links">
             <a href="https://onezero.legal">Portfolio</a>
             <a href="#features">Capabilities</a>

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-09-24T00:00:00Z",
+  "assessment": {
+    "id": "proc-speculative-resale",
+    "label": "Speculative resale of visitor data to unnamed future partners",
+    "processing_description": "Retaining website visitor data 'in case it becomes useful to a future commercial partner'."
+  },
+  "step1": {
+    "verdict": "fail",
+    "lawful": true,
+    "articulated": false,
+    "real_and_present": false,
+    "interest_statement": "Possible future commercial opportunities, not yet identified.",
+    "interest_holder": "controller"
+  },
+  "overall": {
+    "li_appropriate": "no",
+    "confidence": "high"
+  },
+  "gaps": [],
+  "handoff_context": {
+    "objection_pending": false
+  },
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

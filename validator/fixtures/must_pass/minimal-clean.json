@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-09-24T00:00:00Z",
+  "assessment": {
+    "id": "proc-newsletter-analytics",
+    "label": "Weekly newsletter open/click analytics",
+    "controller_name": "Fictional Retail GmbH",
+    "processing_description": "Measuring open and click rates on the weekly customer newsletter to improve content relevance."
+  },
+  "step1": {
+    "verdict": "pass",
+    "lawful": true,
+    "articulated": true,
+    "real_and_present": true,
+    "interest_statement": "Understanding engagement with existing customer communications to improve their relevance.",
+    "interest_holder": "controller"
+  },
+  "step2": {
+    "verdict": "pass",
+    "data_categories": ["email address", "open/click timestamps"],
+    "alternatives_considered": "Aggregate, non-identifying delivery-platform statistics were considered but do not support per-recipient content tailoring.",
+    "minimisation_confirmed": true
+  },
+  "step3": {
+    "verdict": "pass",
+    "balance": "for",
+    "mitigating_measures": ["unrestricted opt-out beyond the Art. 21 legal minimum", "retention capped at 12 months"]
+  },
+  "overall": {
+    "li_appropriate": "yes",
+    "confidence": "high",
+    "review_date": "2027-09-24"
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "topic": "Children on the subscriber list",
+      "question": "Confirm whether the newsletter subscriber list includes any data subjects under the applicable jurisdiction's digital consent age.",
+      "owner": "DPO"
+    }
+  ],
+  "handoff_context": {
+    "objection_pending": false
+  },
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/oliverschmidtprietz/claude-skills/skills/legitimate-interest/references/legitimate-interest-sidecar-schema.json",
+  "title": "Legitimate Interest Assessment (LIA) Sidecar Schema",
+  "description": "Canonical lia-sidecar.json state for the legitimate-interest skill. schema_version ('1.0') is a data-format version, independent of the skill's own version (recorded only in SKILL.md frontmatter, never duplicated here). The shape mirrors SKILL.md's EDPB three-step test (step1 pursuit of a legitimate interest, step2 necessity, step3 balancing) plus an overall verdict and a domain-specific gaps[] register of unresolved balancing factors (evidence-and-effectiveness-style honest gaps, never silently closed). validation.findings[] is the deterministic validator's OWN diagnostics about this document (gate vocabulary rejection|warning|info) — a distinct axis from gaps[], which records open questions about the assessment's substance, not about this document's structural conformance.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version", "generated_by", "generated_at", "assessment", "step1", "overall", "validation"],
+  "properties": {
+    "schema_version": {
+      "enum": ["1.0"],
+      "default": "1.0",
+      "description": "Data-format version of this sidecar schema. Independent of the legitimate-interest skill's own version (metadata.version in SKILL.md)."
+    },
+    "generated_by": {
+      "type": "string",
+      "description": "Producer identifier, typically 'legitimate-interest skill v<X.Y>' (the skill's own live version, not this schema's)."
+    },
+    "generated_at": {"type": "string", "format": "date-time"},
+    "assessment": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["label"],
+      "description": "The processing activity this LIA assesses (SKILL.md 'Batch 1: Essential Questions').",
+      "properties": {
+        "id": {"type": "string", "description": "Stable within-skill identifier, if the surrounding session has one (e.g. an external RoPA activity ref)."},
+        "label": {"type": "string", "description": "Short human label for the assessed processing activity."},
+        "controller_name": {"type": "string"},
+        "processing_description": {"type": "string"}
+      }
+    },
+    "step1": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["verdict"],
+      "description": "STEP 1: Pursuit of a Legitimate Interest (SKILL.md).",
+      "properties": {
+        "verdict": {"enum": ["pass", "fail", "requires_refinement"]},
+        "lawful": {"type": "boolean"},
+        "articulated": {"type": "boolean"},
+        "real_and_present": {"type": "boolean"},
+        "interest_statement": {"type": "string"},
+        "interest_holder": {"enum": ["controller", "third_party", "both"]}
+      }
+    },
+    "step2": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "STEP 2: Necessity of the Processing (SKILL.md). Absent/no verdict when step1 failed and the assessment correctly short-circuited.",
+      "properties": {
+        "verdict": {"enum": ["pass", "fail", "requires_scope_reduction"]},
+        "data_categories": {"type": "array", "items": {"type": "string"}},
+        "alternatives_considered": {"type": "string"},
+        "minimisation_confirmed": {"type": "boolean"}
+      }
+    },
+    "step3": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "STEP 3: Balancing Test (SKILL.md). Absent/no verdict when step1 or step2 failed and the assessment correctly short-circuited.",
+      "properties": {
+        "verdict": {"enum": ["pass", "fail", "pass_with_measures"]},
+        "balance": {"enum": ["for", "against", "close_call"], "description": "Which way the balance tips before any mitigating measures."},
+        "mitigating_measures": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "overall": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["li_appropriate"],
+      "description": "Overall LIA outcome (SKILL.md 'OVERALL RESULT'). The three-step test is conjunctive: li_appropriate can only be 'yes'/'conditional' when every reached step's verdict is not 'fail'.",
+      "properties": {
+        "li_appropriate": {"enum": ["yes", "no", "conditional"]},
+        "confidence": {"enum": ["high", "medium", "low"]},
+        "review_date": {"type": "string", "format": "date"}
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "description": "Unresolved balancing factors — an honestly-recorded open question about the assessment's substance, never silently converted into a negative finding nor invented to close it (mirrors evidence-and-effectiveness.md's Unknown discipline in toms-art32). Distinct from validation.findings[], which is about this document's own structural conformance.",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "topic", "question"],
+        "properties": {
+          "id": {"type": "string"},
+          "topic": {"type": "string"},
+          "question": {"type": "string"},
+          "severity": {"enum": ["rejection", "warning", "info"], "description": "Optional: how much this open question should weigh on the overall verdict. 'rejection' marks a gap that blocks treating li_appropriate as final."},
+          "owner": {"type": "string"}
+        }
+      }
+    },
+    "handoff_context": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional signal for the inbound handoff from data-subject-rights (SKILL.md 'Right to Object Response Mode' / data-subject-rights.md's Art. 21(1) compelling-grounds re-assessment).",
+      "properties": {
+        "objection_pending": {"type": "boolean", "description": "True when this run assesses (or could support) an Art. 21(1) objection's compelling-legitimate-grounds re-balancing."}
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["status", "findings"],
+      "description": "Deterministic structural validation only — never a substantive appropriateness score. validation.findings[].severity is the deterministic validator's own GATE vocabulary (rejection/warning/info), not a legal risk judgement.",
+      "properties": {
+        "status": {"enum": ["passed", "passed_with_warnings", "failed"]},
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["rule_id", "category", "severity", "message"],
+            "properties": {
+              "rule_id": {"type": "string"},
+              "category": {"type": "string"},
+              "severity": {"enum": ["rejection", "warning", "info"]},
+              "priority": {"enum": ["high", "medium", "low"]},
+              "message": {"type": "string"},
+              "spec_anchor": {"type": "string"},
+              "entry_type": {"type": ["string", "null"]},
+              "entry_id": {"type": ["string", "null"]},
+              "field": {"type": ["string", "null"]},
+              "fix_hint": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}

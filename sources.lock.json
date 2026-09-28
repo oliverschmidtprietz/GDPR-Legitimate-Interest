@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-24",
+  "files": {
+    "references/step1-legitimate-interest.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Step 1 of the EDPB three-step test (pursuit of a legitimate interest), per EDPB Guidelines 1/2024. Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes (CF-14/15/24)."
+    },
+    "references/step2-necessity.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Step 2 of the EDPB three-step test (necessity/data minimisation). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/step3-balancing.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Step 3 of the EDPB three-step test (the balancing test). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/context-modules.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Context-specific modules (children, marketing, fraud, IT security, employee monitoring, AI training, etc.). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/cjeu-case-law.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Key CJEU jurisprudence digest (Meta v Bundeskartellamt, SCHUFA, KNLTB, etc.). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/oss-enforcement-practice.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "medium",
+      "owner": "oliverschmidtprietz",
+      "notes": "Digest of the EDPB OSS Case Digest on Legitimate Interest (Dr. TJ McIntyre, March 2026; 62 OSS + 5 EDPB binding decisions). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/additional-regulatory-sources.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-06-11",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "EDPB Opinion 28/2024 (AI models), CNIL AI guidance (June 2025), UK ICO guidance. Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+    },
+    "references/data-subject-rights.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-08-21",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "Art. 21 right-to-object interactions. Re-verified in the v1.1 citation audit: CF-14 corrected the profiling-inclusion clause under the direct-marketing objection from a mis-cite of Art. 21(3) to Art. 21(2)."
+    },
+    "references/jurisdiction-notes.md": {
+      "source_type": "ai-drafted",
+      "jurisdiction": "EU",
+      "url": null,
+      "last_verified": "2026-08-21",
+      "confidence": "high",
+      "owner": "oliverschmidtprietz",
+      "notes": "EU/UK/FR/DE jurisdiction notes. Re-verified in the v1.1 citation audit: CF-24 corrected the public-authority carve-out locator from the non-existent 'Art. 6(1), second indent' to 'Art. 6(1), second subparagraph'."
+    }
+  }
+}

@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 1.0
+  version: 1.2
 ---
 
 # GDPR Legitimate Interest Assessment (LIA)
@@ -95,10 +95,10 @@ Before entering the three-step test, check threshold exclusions:
 
 | Gate | Check | If YES |
 |------|-------|--------|
-| **G1** | Is the controller a public authority performing its tasks? | Art. 6(1)(f) NOT available (Art. 6(1), second indent). Exception: ancillary non-public activities (e.g., managing own premises) — document internally. |
+| **G1** | Is the controller a public authority performing its tasks? | Art. 6(1)(f) NOT available (Art. 6(1), second subparagraph). Exception: ancillary non-public activities (e.g., managing own premises) — document internally. |
 | **G2** | Does the processing fall under ePrivacy Directive (Art. 5(3) or Art. 13)? | Consent likely required first. Check if the Art. 13(2) "soft opt-in" exception applies for existing customer electronic marketing. |
 | **G3** | Does national law restrict or exclude Art. 6(1)(f) for this processing type? | Flag jurisdiction-specific restrictions. Check [references/jurisdiction-notes.md]. |
-| **G4** | Is the controller trying to use Art. 6(1)(f) as a fallback because consent was refused or withdrawn? | Flag: switching legal bases post-hoc is problematic (EDPB Guidelines 1/2024, para. 9). |
+| **G4** | Is the controller trying to use Art. 6(1)(f) as a fallback because consent was refused or withdrawn? | Flag: switching legal bases post-hoc is problematic (EDPB Guidelines 5/2020 on Consent). |
 
 If all gates pass → proceed to three-step test.
 
@@ -421,6 +421,26 @@ Offer to generate a comprehensive Word document (.docx) using the docx skill wit
 10. Action Items and Review Schedule
 11. Annex: Legal References (EDPB Guidelines, CJEU case law, Recitals)
 12. Sign-off section (DPO, Legal Counsel, Controller representative)
+
+---
+
+## Machine-readable output
+
+Alongside the human LIA document, a structured `lia-sidecar.json` can be written
+following [references/legitimate-interest-sidecar-schema.json] (step1/step2/step3
+verdicts, `overall.li_appropriate`, and a `gaps[]` register of unresolved balancing
+factors). Validate it deterministically with:
+
+```bash
+uv run skills/legitimate-interest/validator/validate.py <sidecar.json>
+```
+
+Add `--emit-core-artefact <path>` to also write the portfolio core artefact
+(`skill-artefact-1.1` schema) projection of the run for handoff to a sibling skill
+(e.g. `data-subject-rights`, per the "Data Subject Rights Interaction" section above).
+This is a structural-tier validator (schema conformance + three-step internal
+consistency + source freshness) — it does not itself judge whether Art. 6(1)(f) is
+legally appropriate.
 
 ---
 

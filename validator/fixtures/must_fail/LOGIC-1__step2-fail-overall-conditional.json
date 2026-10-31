@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {"id": "p2", "label": "Retaining all biometric iris codes after account closure"},
+  "step1": {"verdict": "pass", "lawful": true, "articulated": true, "real_and_present": true},
+  "step2": {"verdict": "fail", "data_categories": ["iris biometric templates"], "minimisation_confirmed": false},
+  "overall": {"li_appropriate": "conditional", "confidence": "medium"},
+  "gaps": [],
+  "validation": {"status": "passed", "findings": []}
+}

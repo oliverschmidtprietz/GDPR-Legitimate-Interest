@@ -2,3 +2,4 @@
 from . import schema_conformance  # noqa: F401
 from . import consistency  # noqa: F401
 from . import sources  # noqa: F401
+from . import special_category  # noqa: F401

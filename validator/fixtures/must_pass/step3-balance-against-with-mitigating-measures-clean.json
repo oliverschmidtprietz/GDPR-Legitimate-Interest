@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {
+    "id": "proc-ride-hailing-ratings",
+    "label": "Ride-hailing driver/passenger rating system"
+  },
+  "step1": {
+    "verdict": "pass",
+    "lawful": true,
+    "articulated": true,
+    "real_and_present": true,
+    "interest_statement": "Maintaining service quality and safety through a two-sided rating system."
+  },
+  "step2": {
+    "verdict": "pass",
+    "data_categories": ["ratings", "trip metadata"],
+    "minimisation_confirmed": true
+  },
+  "step3": {
+    "verdict": "pass_with_measures",
+    "balance": "against",
+    "mitigating_measures": [
+      "right to challenge ratings",
+      "in-app disclosure of calculation/retention/consequences",
+      "human review of automated suspensions"
+    ]
+  },
+  "overall": {
+    "li_appropriate": "conditional",
+    "confidence": "medium"
+  },
+  "gaps": [],
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

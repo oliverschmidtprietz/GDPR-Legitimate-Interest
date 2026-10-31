@@ -811,8 +811,8 @@ body {
 
     <section class="hero">
         <div class="badges">
-            <div class="badge badge--live">LIVE · v1.2 STABLE</div>
-            <div class="badge">BUILD 2026.09.24</div>
+            <div class="badge badge--live">LIVE · v1.3 STABLE</div>
+            <div class="badge">BUILD 2026.10.02</div>
             <div class="badge badge--color">ART. 6(1)(F)</div>
             <div class="badge">AGPL-3.0 · 4 EVAL CASES · 0 ASSERTIONS</div>
         </div>
@@ -1008,6 +1008,7 @@ body {
 │   └── step3-balancing.md
 ├── tests
 │   ├── conftest.py
+│   ├── test_cli_input_guard.py
 │   ├── test_emit_core_artefact.py
 │   ├── test_emit_core_artefact_malformed.py
 │   ├── test_rules.py
@@ -1231,6 +1232,10 @@ body {
 </blockquote>
 <p>GDPR <strong>Legitimate Interest Assessment</strong> skill for Claude — guides a structured Art. 6(1)(f) assessment
 using the EDPB three-step test and produces a documented LIA suitable for accountability records.</p>
+<p>The deterministic validator (<code>validator/validate.py</code>) checks only that a <code>lia-sidecar.json</code> is
+internally consistent and complete against its own schema — a passing validation result is not,
+and never substitutes for, a legal judgement that Art. 6(1)(f) is actually appropriate for the
+processing described.</p>
 <h2>Overview</h2>
 <p>Combines the current legitimate-interest sources into a guided three-step workflow:</p>
 <ul>
@@ -1275,7 +1280,7 @@ mechanism). The skill activates on legitimate-interest / Art. 6(1)(f) / "Interes
     </section>
 
     <footer class="page-footer">
-        <span class="footer-text">onezero.legal · /SKILLS/LEGITIMATE.INTEREST · v1.2</span>
+        <span class="footer-text">onezero.legal · /SKILLS/LEGITIMATE.INTEREST · v1.3</span>
         <nav class="footer-links">
             <a href="https://onezero.legal">Portfolio</a>
             <a href="#features">Capabilities</a>

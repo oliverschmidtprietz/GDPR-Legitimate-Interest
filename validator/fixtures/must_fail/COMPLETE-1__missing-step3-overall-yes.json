@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {"id": "p5", "label": "AI training on scraped personal data, balancing skipped"},
+  "step1": {"verdict": "pass", "lawful": true, "articulated": true, "real_and_present": true},
+  "step2": {"verdict": "pass", "data_categories": ["scraped public posts"], "minimisation_confirmed": true},
+  "overall": {"li_appropriate": "yes", "confidence": "high"},
+  "gaps": [],
+  "validation": {"status": "passed", "findings": []}
+}

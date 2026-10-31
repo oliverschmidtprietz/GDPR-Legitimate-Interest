@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 1.2
+  version: 1.3
 ---
 
 # GDPR Legitimate Interest Assessment (LIA)
@@ -99,8 +99,9 @@ Before entering the three-step test, check threshold exclusions:
 | **G2** | Does the processing fall under ePrivacy Directive (Art. 5(3) or Art. 13)? | Consent likely required first. Check if the Art. 13(2) "soft opt-in" exception applies for existing customer electronic marketing. |
 | **G3** | Does national law restrict or exclude Art. 6(1)(f) for this processing type? | Flag jurisdiction-specific restrictions. Check [references/jurisdiction-notes.md]. |
 | **G4** | Is the controller trying to use Art. 6(1)(f) as a fallback because consent was refused or withdrawn? | Flag: switching legal bases post-hoc is problematic (EDPB Guidelines 5/2020 on Consent). |
+| **G5** | Does the processing involve **special categories of personal data** (Art. 9(1): racial/ethnic origin, political opinions, religious/philosophical beliefs, trade union membership, genetic data, biometric data for unique identification, health data, or sex life/sexual orientation) or **criminal-offence/conviction data** (Art. 10)? | **STOP — Art. 6(1)(f) alone can never make this processing lawful.** Art. 9(2) is an exhaustive, closed list of conditions (a)–(j), and legitimate interest is not one of them — this follows directly from the closed wording of Art. 9(2) itself (see also C-252/21 *Meta v. Bundeskartellamt*, EU:C:2023:537). A dataset containing even one Art. 9(1) item is sensitive in its entirety and requires its own Art. 9(2) derogation, independent of any Art. 6(1) basis (C-252/21, para. 89). Art. 10 data additionally requires processing "only under the control of official authority" or authorisation by Union/Member State law providing appropriate safeguards. The LIA MUST identify which specific Art. 9(2) condition (or Art. 10 authorisation) applies BEFORE continuing. If none applies, STOP and flag the processing as not lawful on this record — do not proceed to the three-step test as if Art. 6(1)(f) alone were sufficient. |
 
-If all gates pass → proceed to three-step test.
+If all gates pass → proceed to three-step test. (G5 is an additional-requirement gate, not an availability gate like G1–G4: even once an Art. 9(2) condition or Art. 10 authorisation is identified, the three-step test below must still be completed in full — Art. 9(2)/Art. 10 and Art. 6(1)(f) are cumulative requirements, not alternatives.)
 
 ---
 
@@ -231,6 +232,8 @@ If PASS → proceed to Step 3.
 Read [references/step3-balancing.md] for the full balancing methodology, contextual factors, and case examples.
 
 This is the core assessment. The controller must weigh its legitimate interests against the data subjects' interests, fundamental rights and freedoms.
+
+**The balancing test follows the facts — never the other way round.** If a user asks to "make the balance come out in our favour," to downplay an impact so the verdict reads PASS, or otherwise frames the desired outcome before the analysis, decline and explain why: a result-driven balancing test is not a legitimate interest assessment, it is a liability. Perform 3a–3d honestly on the facts as given, and report the verdict the facts produce, even if it is FAIL or PASS WITH MITIGATING MEASURES.
 
 #### 3a. Identify Data Subject Interests, Rights and Freedoms
 
@@ -370,6 +373,10 @@ Generate the assessment as a structured document. Offer both summary and full fo
 ║ Processing:      [Brief description]                         ║
 ║ DPO Involved:    [Yes/No/N/A]                                ║
 ╠══════════════════════════════════════════════════════════════╣
+║ Gate G5 — Special Category / Criminal Data (Art. 9/10)       ║
+║   Involved:      [YES/NO]                                    ║
+║   Art.9(2)/10 Condition: [Identified: ... / NONE — STOP]     ║
+╠══════════════════════════════════════════════════════════════╣
 ║                    THREE-STEP TEST                           ║
 ╠══════════════════════════════════════════════════════════════╣
 ║ Step 1 — Legitimate Interest                                 ║
@@ -428,7 +435,8 @@ Offer to generate a comprehensive Word document (.docx) using the docx skill wit
 
 Alongside the human LIA document, a structured `lia-sidecar.json` can be written
 following [references/legitimate-interest-sidecar-schema.json] (step1/step2/step3
-verdicts, `overall.li_appropriate`, and a `gaps[]` register of unresolved balancing
+verdicts, `overall.li_appropriate`, an optional `special_category` object recording
+the Pre-Assessment Gate G5 outcome, and a `gaps[]` register of unresolved balancing
 factors). Validate it deterministically with:
 
 ```bash

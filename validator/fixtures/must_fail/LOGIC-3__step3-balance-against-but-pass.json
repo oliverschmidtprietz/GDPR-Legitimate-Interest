@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {"id": "p4", "label": "Behavioural ad profiling of free social network users"},
+  "step1": {"verdict": "pass", "lawful": true, "articulated": true, "real_and_present": true},
+  "step2": {"verdict": "pass", "data_categories": ["browsing behaviour"], "minimisation_confirmed": true},
+  "step3": {"verdict": "pass", "balance": "against", "mitigating_measures": []},
+  "overall": {"li_appropriate": "yes", "confidence": "high"},
+  "gaps": [],
+  "validation": {"status": "passed", "findings": []}
+}

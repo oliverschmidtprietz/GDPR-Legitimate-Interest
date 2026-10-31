@@ -8,9 +8,9 @@
   "required": ["schema_version", "generated_by", "generated_at", "assessment", "step1", "overall", "validation"],
   "properties": {
     "schema_version": {
-      "enum": ["1.0"],
-      "default": "1.0",
-      "description": "Data-format version of this sidecar schema. Independent of the legitimate-interest skill's own version (metadata.version in SKILL.md)."
+      "enum": ["1.1", "1.0"],
+      "default": "1.1",
+      "description": "Data-format version of this sidecar schema. Independent of the legitimate-interest skill's own version (metadata.version in SKILL.md). '1.1' (current, default) adds the optional top-level special_category object (Pre-Assessment Gate G5 outcome) — a backwards-compatible additive change; schema_version '1.0' documents remain valid (special_category simply absent)."
     },
     "generated_by": {
       "type": "string",
@@ -73,6 +73,16 @@
         "li_appropriate": {"enum": ["yes", "no", "conditional"]},
         "confidence": {"enum": ["high", "medium", "low"]},
         "review_date": {"type": "string", "format": "date"}
+      }
+    },
+    "special_category": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional Pre-Assessment Gate G5 outcome (SKILL.md 'Pre-Assessment Gate: Is Art. 6(1)(f) Even Available?'): whether Art. 9(1) special category data or Art. 10 criminal-offence/conviction data is involved, and if so which Art. 9(2)(a)-(j) condition (or Art. 10 authorisation) was identified. Art. 6(1)(f) alone can never make such processing lawful — Art. 9(2) is an exhaustive, closed list that does not include legitimate interest, which follows directly from the closed wording of Art. 9(2) itself (see also C-252/21 Meta v. Bundeskartellamt, EU:C:2023:537). Absence of this field means nothing was recorded either way (never read as 'not involved') — the ART9-1 validator rule only fires when involved is explicitly true.",
+      "properties": {
+        "involved": {"type": "boolean", "description": "True if Art. 9(1) special category data or Art. 10 criminal-offence/conviction data is processed."},
+        "categories": {"type": "array", "items": {"type": "string"}, "description": "Which Art. 9(1) categories apply (or 'Art. 10 criminal offence data')."},
+        "art9_condition": {"type": ["string", "null"], "description": "The applicable Art. 9(2)(a)-(j) condition, or the Art. 10 official-authority/authorisation basis, once identified. null/absent means none identified yet."}
       }
     },
     "gaps": {

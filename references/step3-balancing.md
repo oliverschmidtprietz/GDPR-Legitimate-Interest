@@ -46,6 +46,8 @@ Include ALL interests that may be affected (para. 38):
 |-----------|-------------|----------------------|
 | Art. 9 special categories (health, biometric, genetic, racial/ethnic, political, religious, sexual orientation, trade union) | **HIGHEST** | Art. 9(2) conditions ALSO required; data set containing even one sensitive item is deemed sensitive in its entirety (C-252/21, para. 89) |
 | Art. 10 criminal convictions/offences | **VERY HIGH** | Additional Art. 10 conditions required |
+
+**Art. 6(1)(f) is never sufficient on its own for Art. 9/10 data.** Art. 9(2) GDPR is an exhaustive, closed list of lawful conditions (a)–(j) — explicit consent, employment/social-security law, vital interests, not-for-profit body members, manifestly-public data, legal claims, substantial public interest, health/social care, public health, or Art. 89(1) archiving/research/statistics — and legitimate interest is not one of them; this follows directly from the closed wording of Art. 9(2) itself (see also C-252/21 *Meta v. Bundeskartellamt*, EU:C:2023:537). Art. 10 additionally requires that criminal-offence/conviction processing happen "only under the control of official authority" or be "authorised by Union or Member State law providing for appropriate safeguards." A favourable Step 3 balance can never substitute for identifying one of these independently. See SKILL.md Pre-Assessment Gate G5.
 | Financial data (bank, salary, credit) | **HIGH** | Considered more private by data subjects |
 | Location data | **HIGH** | Reveals movement patterns, habits |
 | Communications metadata | **HIGH** | Can reveal associations, relationships |

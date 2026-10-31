@@ -19,8 +19,19 @@ def test_schema_version_is_decoupled_from_skill_version():
     # sidecar schema version is a data-format version, independent of the skill version
     # (SKILL.md frontmatter).
     sv = schema["properties"]["schema_version"]
-    assert sv["enum"] == ["1.0"]
-    assert sv["default"] == "1.0"
+    # v1.1 (break-it fix 2026-10-02) added the optional special_category object —
+    # a backwards-compatible additive change — so "1.0" documents remain valid.
+    assert sv["enum"] == ["1.1", "1.0"]
+    assert sv["default"] == "1.1"
+
+
+def test_special_category_is_optional_and_backwards_compatible():
+    schema = _load_schema()
+    assert "special_category" not in schema.get("required", [])
+    sc = schema["properties"]["special_category"]
+    assert sc["type"] == "object"
+    assert "involved" in sc["properties"]
+    assert "art9_condition" in sc["properties"]
 
 
 def test_three_step_verdict_enums_present_verbatim():

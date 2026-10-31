@@ -1,7 +1,12 @@
-"""Rule coverage: RUNNER-0 (empty-registry guard), SCHEMA-1, LOGIC-1, ORDER-1,
-COMPLETE-1, SRC-1 — each proven to fire as a Finding (never an exception), and
-proven to fire ALONE on its own must_fail fixture (never collaterally trip an
-unrelated rule).
+"""Rule coverage: RUNNER-0 (empty-registry guard), SCHEMA-1, LOGIC-1, LOGIC-2,
+LOGIC-3, ORDER-1, COMPLETE-1, SRC-1, ART9-1 — each proven to fire as a Finding
+(never an exception), and proven to fire ALONE on its own must_fail fixture
+(never collaterally trip an unrelated rule).
+
+LOGIC-1/LOGIC-2/LOGIC-3/COMPLETE-1(rejection branch)/ART9-1 fixtures mirror the
+break-it probes at scratchpad/breakit/legitimate-interest/p1-p6 (FIX-BRIEF
+2026-10-02) — copied in as committed fixtures, never referenced by scratchpad
+path from this file.
 """
 import json
 from pathlib import Path
@@ -19,7 +24,7 @@ SCHEMA = VALIDATOR.parent / "references" / "legitimate-interest-sidecar-schema.j
 REFERENCES_DIR = VALIDATOR.parent / "references"
 FIX = VALIDATOR / "fixtures"
 
-ALL_RULE_IDS = {"SCHEMA-1", "LOGIC-1", "ORDER-1", "COMPLETE-1", "SRC-1"}
+ALL_RULE_IDS = {"SCHEMA-1", "LOGIC-1", "LOGIC-2", "LOGIC-3", "ORDER-1", "COMPLETE-1", "SRC-1", "ART9-1"}
 
 
 def _ctx(sources_lock_override=None, references_dir=REFERENCES_DIR):
@@ -64,9 +69,31 @@ def test_step1_fail_shortcircuit_clean_passes_with_zero_findings():
     assert result.status == "passed"
 
 
+@pytest.mark.parametrize("fixture_name", [
+    "step3-balance-against-with-mitigating-measures-clean.json",
+    "special-category-with-art9-condition-clean.json",
+])
+def test_new_rule_must_pass_fixture_has_zero_findings(fixture_name):
+    # No-false-positives regression (FIX-BRIEF 2026-10-02): a legitimate case near each
+    # new rule (LOGIC-3, ART9-1) must still validate cleanly.
+    result = validate(_load(FIX / "must_pass" / fixture_name), _ctx())
+    assert result.findings == [], [f.to_dict() for f in result.findings]
+    assert result.status == "passed"
+
+
 @pytest.mark.parametrize("fixture_name,rule_id", [
     ("SCHEMA-1__bad-verdict-enum.json", "SCHEMA-1"),
     ("LOGIC-1__step1-fail-overall-yes.json", "LOGIC-1"),
+    ("LOGIC-1__step1-fail-overall-conditional.json", "LOGIC-1"),
+    ("LOGIC-1__step2-fail-overall-conditional.json", "LOGIC-1"),
+    ("LOGIC-2__step1-pass-lawful-false.json", "LOGIC-2"),
+    ("LOGIC-3__step3-balance-against-but-pass.json", "LOGIC-3"),
+    ("ART9-1__special-category-no-condition.json", "ART9-1"),
+    ("COMPLETE-1__missing-step3-overall-yes.json", "COMPLETE-1"),
+    # overall.li_appropriate "conditional" is a positive claim too (schema's own
+    # description), so this case — step1+step2 pass, step3 missing, overall "conditional"
+    # — now escalates COMPLETE-1 to rejection, same as the "yes" case above.
+    ("COMPLETE-1__missing-step3-verdict.json", "COMPLETE-1"),
 ])
 def test_must_fail_fixture_trips_exactly_its_named_rejecting_rule(fixture_name, rule_id):
     sidecar = _load(FIX / "must_fail" / fixture_name)
@@ -77,12 +104,12 @@ def test_must_fail_fixture_trips_exactly_its_named_rejecting_rule(fixture_name, 
 
 @pytest.mark.parametrize("fixture_name,rule_id", [
     ("ORDER-1__step1-fail-step2-verdict-present.json", "ORDER-1"),
-    ("COMPLETE-1__missing-step3-verdict.json", "COMPLETE-1"),
+    ("COMPLETE-1__missing-step3-overall-no.json", "COMPLETE-1"),
 ])
 def test_must_fail_fixture_trips_exactly_its_named_warning_rule(fixture_name, rule_id):
-    # ORDER-1 and COMPLETE-1 are severity="warning", not "rejection", so they are checked
-    # separately from the rejection-only fixtures above: a warning-only run is
-    # "passed_with_warnings", not "failed".
+    # ORDER-1 and COMPLETE-1's "no positive claim" branch are severity="warning", not
+    # "rejection", so they are checked separately from the rejection-only fixtures above:
+    # a warning-only run is "passed_with_warnings", not "failed".
     sidecar = _load(FIX / "must_fail" / fixture_name)
     result = validate(sidecar, _ctx())
     assert result.status == "passed_with_warnings"

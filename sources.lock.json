@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-24",
+  "generated_at": "2026-10-02",
   "files": {
     "references/step1-legitimate-interest.md": {
       "source_type": "ai-drafted",
@@ -24,10 +24,10 @@
       "source_type": "ai-drafted",
       "jurisdiction": "EU",
       "url": null,
-      "last_verified": "2026-06-11",
+      "last_verified": "2026-10-02",
       "confidence": "high",
       "owner": "oliverschmidtprietz",
-      "notes": "Step 3 of the EDPB three-step test (the balancing test). Unchanged since the v1.0 baseline; not touched by the v1.1 citation-audit fixes."
+      "notes": "Step 3 of the EDPB three-step test (the balancing test). v1.3 break-it fix (2026-10-02): added an explicit 'Art. 6(1)(f) is never sufficient on its own for Art. 9/10 data' callout under the nature-of-data table, citing GDPR Art. 9(2)(a)-(j) (exhaustive list, verified against gdpr-info.eu: legitimate interest is not one of them, which follows directly from the closed wording of Art. 9(2) itself) and Art. 10 (verified against gdpr-info.eu: criminal-offence processing requires official-authority control or Member State/Union law authorisation with safeguards). C-252/21 Meta v. Bundeskartellamt, EU:C:2023:537 cited as 'see also' with no paragraph pin for the Art. 9(2)-is-exhaustive point (2026-10-02 correction: a paras. 85-90 pin-cite for this point was added without verifying the primary judgment text and was removed — that range could not be confirmed to concern this point rather than the separate Art. 9(2)(e) manifestly-public-data question). The pre-existing para. 89 pin (dataset sensitive in its entirety requires its own Art. 9(2) derogation) on the table row above is untouched and was not part of this correction."
     },
     "references/context-modules.md": {
       "source_type": "ai-drafted",

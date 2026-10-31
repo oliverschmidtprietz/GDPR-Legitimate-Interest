@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.1",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {
+    "id": "proc-health-portal-security",
+    "label": "Fraud detection on a patient health portal"
+  },
+  "step1": {
+    "verdict": "pass",
+    "lawful": true,
+    "articulated": true,
+    "real_and_present": true,
+    "interest_statement": "Detecting fraudulent account takeover attempts on the patient portal."
+  },
+  "step2": {
+    "verdict": "pass",
+    "data_categories": ["login metadata", "device fingerprint"],
+    "minimisation_confirmed": true
+  },
+  "step3": {
+    "verdict": "pass",
+    "balance": "for"
+  },
+  "overall": {
+    "li_appropriate": "yes",
+    "confidence": "high"
+  },
+  "special_category": {
+    "involved": true,
+    "categories": ["health data (portal relates to patient accounts)"],
+    "art9_condition": "Art. 9(2)(h) — necessary for the provision of health/social care, under professional secrecy obligations"
+  },
+  "gaps": [],
+  "validation": {
+    "status": "passed",
+    "findings": []
+  }
+}

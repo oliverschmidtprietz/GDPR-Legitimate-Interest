@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "legitimate-interest skill v<X.Y>",
+  "generated_at": "2026-10-02T00:00:00Z",
+  "assessment": {"id": "p3", "label": "Promoting a product prohibited by national law"},
+  "step1": {"verdict": "pass", "lawful": false, "articulated": true, "real_and_present": true, "interest_statement": "Sell product X."},
+  "step2": {"verdict": "pass", "data_categories": ["contact details"], "minimisation_confirmed": true},
+  "step3": {"verdict": "pass", "balance": "for"},
+  "overall": {"li_appropriate": "yes", "confidence": "high"},
+  "gaps": [],
+  "validation": {"status": "passed", "findings": []}
+}

@@ -6,6 +6,85 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v1.3] — 2026-10-02
+
+Break-it test 2026-10-02 fixes (`scratchpad/breakit/legitimate-interest/p1-p12`,
+`LEDGER.md`). Highest-priority legal-content gap closed, four validator logic
+holes closed, and the CLI's crash-on-bad-input bug fixed.
+
+- **HIGH — Pre-Assessment Gate G5 (legal content)**: added a new gate to
+  "Pre-Assessment Gate: Is Art. 6(1)(f) Even Available?" (SKILL.md) — Art.
+  6(1)(f) alone can never legitimise Art. 9(1) special category data or Art. 10
+  criminal-offence/conviction data. Art. 9(2) is an exhaustive, closed list of
+  conditions (a)-(j) that does not include legitimate interest; Art. 10
+  additionally requires official-authority control or Member State/Union law
+  authorisation with safeguards. The LIA must identify the applicable
+  condition before proceeding, or stop and flag. Matching line added to the
+  Summary Format output template, and to `references/step3-balancing.md`'s
+  nature-of-data table. Verified against GDPR Art. 9(1)/9(2)(a)-(j)/10 text
+  (gdpr-info.eu) — legitimate interest is not one of the (a)-(j) conditions,
+  which follows directly from the closed wording of Art. 9(2) itself, cited
+  "see also" to C-252/21 *Meta v. Bundeskartellamt*, EU:C:2023:537 with no
+  paragraph pin (2026-10-02 correction: an earlier paras. 85-90 pin-cite for
+  this specific point was dropped — that range was never verified against the
+  primary judgment text and risked actually concerning the separate Art.
+  9(2)(e) manifestly-public-data question). The pre-existing, separately
+  verified para. 89 citation for "a dataset with even one Art. 9(1) item is
+  sensitive in its entirety" (`step3-balancing.md` line 47) is untouched.
+- **`references/legitimate-interest-sidecar-schema.json`** (schema v1.0 →
+  v1.1, backwards compatible) — added an optional top-level `special_category`
+  object (`involved`, `categories[]`, `art9_condition`) recording the Gate G5
+  outcome. Absence means nothing was recorded either way, never "not
+  involved".
+- **New validator rule `ART9-1`** (rejection) — `special_category.involved:
+  true` with `overall.li_appropriate` in `yes`/`conditional` and no
+  `art9_condition` recorded is a rejection: Art. 6(1)(f) cannot stand in for
+  the missing Art. 9(2)/Art. 10 basis.
+- **`LOGIC-1` extended** — previously only checked `overall.li_appropriate ==
+  'yes'`; now treats `'conditional'` identically (the schema's own description
+  already said `li_appropriate` can only be `'yes'`/`'conditional'` when every
+  reached step passed — `'conditional'` is a positive claim too).
+- **New validator rule `LOGIC-2`** (rejection) — `step1.verdict: pass` can no
+  longer coexist with `lawful`/`articulated`/`real_and_present: false`; the
+  three criteria are cumulative (EDPB Guidelines 1/2024, para. 17).
+- **New validator rule `LOGIC-3`** (rejection) — `step3.verdict: pass` can no
+  longer coexist with `balance: against` and an empty/absent
+  `mitigating_measures[]`; per `step3-balancing.md`, an against-balance
+  requires mitigating measures and a re-run balance before it can be treated
+  as resolved in the controller's favour.
+- **`COMPLETE-1` escalated** — a missing `step3` verdict after `step1`/`step2`
+  both pass was previously always a warning (an exit-0 pass). It now escalates
+  to rejection when `overall.li_appropriate` makes a positive claim (`yes` or
+  `conditional`) despite the incomplete test; it remains a warning when no
+  positive claim is made (`overall.li_appropriate: no`).
+- **CLI crash fix (`validator/validate.py`)** — the file-read/JSON-parse step
+  had no guard at all: a missing file, an unreadable file, invalid UTF-8, or
+  invalid JSON syntax raised an uncaught exception with a raw traceback; a
+  non-object top-level JSON document (array/string/null/number) additionally
+  crashed `--emit-core-artefact`'s `{**sidecar, ...}` dict-spread with a
+  `TypeError`. All five cases now fail closed: a clean one-line message, exit
+  1, `status: "failed"` with a single `INPUT-1` rejection finding (mirroring
+  `RUNNER-0`'s shape), and — with `--emit-core-artefact` — a schema-valid
+  `blocked` artefact instead of no file or a traceback.
+- **Anti-result-driven-balancing instruction** — STEP 3 now explicitly states
+  that the balancing test follows the facts, not a desired outcome, and
+  instructs the skill to decline a request to "make the balance come out in
+  our favour."
+- **Validator-scope disclaimer added to `README.md`** — mirrors the sentence
+  already in `SKILL.md`'s "Machine-readable output" section: a passing
+  validation result means the sidecar is internally consistent and complete,
+  never that the legal analysis is correct.
+- **9 new/updated fixtures** (`validator/fixtures/`) mirroring the break-it
+  probes, plus a dedicated CLI input-guard test file
+  (`tests/test_cli_input_guard.py`) covering missing/unreadable/non-UTF-8/
+  malformed-JSON/non-object-top-level input, both with and without
+  `--emit-core-artefact`.
+- **`sources.lock.json`** — `references/step3-balancing.md` re-verified
+  2026-10-02 (the Art. 9/10 callout addition); manifest `generated_at` bumped
+  to match.
+
+---
+
 ## [v1.2] — 2026-09-24
 
 Portfolio standard Level 1 (structural-tier) adoption

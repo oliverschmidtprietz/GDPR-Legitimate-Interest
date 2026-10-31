@@ -5,6 +5,11 @@
 GDPR **Legitimate Interest Assessment** skill for Claude — guides a structured Art. 6(1)(f) assessment
 using the EDPB three-step test and produces a documented LIA suitable for accountability records.
 
+The deterministic validator (`validator/validate.py`) checks only that a `lia-sidecar.json` is
+internally consistent and complete against its own schema — a passing validation result is not,
+and never substitutes for, a legal judgement that Art. 6(1)(f) is actually appropriate for the
+processing described.
+
 ## Overview
 
 Combines the current legitimate-interest sources into a guided three-step workflow:

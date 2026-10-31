@@ -5,7 +5,7 @@ description: |
 metadata:
   author: Oliver Schmidt-Prietz
   license: AGPL-3.0
-  version: 1.3
+  version: 1.4
 ---
 
 # GDPR Legitimate Interest Assessment (LIA)

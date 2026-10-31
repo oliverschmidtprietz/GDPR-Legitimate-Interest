@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/oliverschmidtprietz/claude-skills/docs/standards/schemas/skill-artefact-1.1.schema.json",
+  "title": "Portfolio skill artefact 1.1 (core)",
+  "description": "The machine-readable result every skill emits alongside its human document (D-WS3-06). Rich skills extend it; a skill with a native artefact produces this by projection (to_core_artefact), never by restructuring what it already ships.",
+  "type": "object",
+  "required": ["artefact_schema_version", "skill", "skill_version", "generated_at",
+               "subject", "outcome", "gaps", "sources", "handoffs", "unknowns"],
+  "properties": {
+    "artefact_schema_version": {"enum": ["1.0", "1.1"]},
+    "skill": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "skill_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "disclosure_classification": {
+      "enum": ["restricted_internal", "controlled_external", "general"],
+      "description": "Optional, most to least restrictive. Defaults never escalate: a record is born restricted_internal."
+    },
+    "subject": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": {"type": "string",
+               "description": "Within-skill stable identifier. Granularity is skill-defined; opaque — a consumer MUST NOT parse meaning out of it and MUST NOT equality-join it across skills. Cross-skill correlation flows through subject.org and reference fields (e.g. a delta's target_activity_id)."},
+        "label": {"type": "string"},
+        "type": {
+          "enum": ["organisation", "processing_activity", "transfer", "assessment", "other"],
+          "description": "Subject granularity (WS3A Option C sub-decision 1). Required for 1.1 emitters via the conditional below; optional for 1.0 emitters until their next release."
+        },
+        "org": {
+          "type": "string", "pattern": "^[a-z0-9-]+$",
+          "description": "Organisation slug scoping the native id (portfolio slugify convention: lowercase; runs of non-alphanumerics to single hyphens; strip edge hyphens). Optional: org-agnostic skills may omit it (gap-7 amendment)."
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "summary"],
+      "properties": {
+        "status": {"enum": ["complete", "provisional", "blocked"]},
+        "summary": {"type": "string"}
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "message"],
+        "properties": {
+          "id": {"type": "string"},
+          "severity": {"enum": ["rejection", "warning", "info"]},
+          "message": {"type": "string"},
+          "fix_hint": {"type": "string"}
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "citation", "last_verified"],
+        "properties": {
+          "id": {"type": "string"},
+          "citation": {"type": "string"},
+          "last_verified": {"type": "string", "format": "date"}
+        }
+      }
+    },
+    "handoffs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sibling_skill", "reason"],
+        "properties": {
+          "sibling_skill": {"type": "string", "pattern": "^[a-z0-9-]+$",
+                            "description": "Registered skill directory name. NOT a closed enum — an uninstalled name degrades to an unknowns[] entry, never an error."},
+          "reason": {"type": "string"},
+          "payload_ref": {"type": "string"}
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "question", "blocking"],
+        "properties": {
+          "id": {"type": "string"},
+          "question": {"type": "string"},
+          "blocking": {"type": "boolean"}
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": {"artefact_schema_version": {"const": "1.1"}},
+    "required": ["artefact_schema_version"]
+  },
+  "then": {"properties": {"subject": {"required": ["id", "label", "type"]}}}
+}

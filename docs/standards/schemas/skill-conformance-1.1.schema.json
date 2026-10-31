@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/oliverschmidtprietz/claude-skills/docs/standards/schemas/skill-conformance-1.1.schema.json",
+  "title": "Skill conformance declaration 1.1",
+  "description": "A skill's claim about which parts of the portfolio standard it implements. Every claim is verified against disk by scripts/check_conformance.py — a declaration is a claim, not proof (D-WS3-05). 1.1 adds emit_check_input so the emits_core_artefact claim is behaviourally verifiable (gap 5 closure).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["conformance_schema_version", "skill", "standard_version", "tier",
+               "validator", "artefact_schema", "sources_lock",
+               "emits_core_artefact", "declared_at"],
+  "properties": {
+    "conformance_schema_version": {"const": "1.1"},
+    "skill": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "standard_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+    "tier": {
+      "enum": ["full", "structural"],
+      "description": "full = findings-based rule validator; structural = artefact schema + completeness check. Both are legitimate, finished tiers: a deliberately scoped structural validator is not a placeholder for full. full is opt-in, not mandatory (D-WS3-06, revisited 2026-09-24)."
+    },
+    "validator": {"type": "string", "description": "Repo-relative-to-skill path to validate.py. This schema only checks the value is a string — it does not check the path exists on disk; scripts/check_conformance.py verifies it against disk."},
+    "artefact_schema": {"type": "string", "description": "Repo-relative-to-skill path to the artefact JSON Schema. This schema only checks the value is a string — it does not check the path exists on disk; scripts/check_conformance.py verifies it against disk."},
+    "sources_lock": {"type": "string", "description": "Repo-relative-to-skill path to sources.lock.json. This schema only checks the value is a string — it does not check the path exists on disk; scripts/check_conformance.py verifies it against disk."},
+    "emits_core_artefact": {"type": "boolean"},
+    "emit_check_input": {"type": "string", "description": "Repo-relative-to-skill path to a known-good native sidecar. When emits_core_artefact is true, scripts/check_conformance.py runs `<validator> <emit_check_input> --emit-core-artefact <tmp>` and validates the emitted document against skill-artefact-1.1.schema.json with a FormatChecker (§9.1). Required exactly when emits_core_artefact is true."},
+    "declared_at": {"type": "string", "format": "date"}
+  },
+  "if": {
+    "properties": {"emits_core_artefact": {"const": true}},
+    "required": ["emits_core_artefact"]
+  },
+  "then": {"required": ["emit_check_input"]}
+}

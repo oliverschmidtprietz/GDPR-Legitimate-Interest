@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/oliverschmidtprietz/claude-skills/docs/standards/schemas/findings-report-2.0.schema.json",
+  "title": "Portfolio findings report 2.0",
+  "description": "The report a skill's deterministic validator emits about its own run. Replaces ropa's schema_version envelope and toms-art32's findings_schema_version envelope, which both declared \"1.0\" while emitting different shapes (D-WS3-04).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["report_schema_version", "status", "skill", "skill_version",
+               "validator_version", "validated_at", "artefact_path", "mode",
+               "summary", "findings"],
+  "properties": {
+    "report_schema_version": {"const": "2.0"},
+    "status": {"enum": ["passed", "passed_with_warnings", "passed_with_override", "failed"]},
+    "skill": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "skill_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+$"},
+    "validator_version": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "validated_at": {"type": "string", "format": "date-time"},
+    "artefact_path": {"type": "string"},
+    "mode": {"enum": ["internal", "submission"]},
+    "draft_override": {"type": "boolean",
+      "description": "Optional extension field; only ropa emits it."},
+    "draft_override_log_path": {"type": "string",
+      "description": "Optional extension field; only ropa emits it. Path to the override session log written when a --draft run overrides rejections (skills/ropa/validator/validate.py)."},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rejections", "warnings", "info", "rules_evaluated"],
+      "properties": {
+        "rejections": {"type": "integer", "minimum": 0},
+        "warnings": {"type": "integer", "minimum": 0},
+        "info": {"type": "integer", "minimum": 0},
+        "rules_evaluated": {"type": "integer", "minimum": 0}
+      },
+      "description": "status MUST NOT appear here — it lives at the top level only, so a consumer never has to decide which copy wins."
+    },
+    "findings": {"type": "array", "items": {"$ref": "#/$defs/Finding"}}
+  },
+  "$defs": {
+    "Finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "category", "severity", "message", "spec_anchor"],
+      "properties": {
+        "rule_id": {"type": "string"},
+        "category": {"type": "string"},
+        "severity": {
+          "enum": ["rejection", "warning", "info"],
+          "description": "The gate. Consumer rule: if severity == \"rejection\": block. D-WS3-02."
+        },
+        "priority": {
+          "enum": ["high", "medium", "low"],
+          "description": "Optional risk grading; never affects the gate. D-WS3-02."
+        },
+        "message": {"type": "string"},
+        "spec_anchor": {"type": "string"},
+        "entry_type": {"type": ["string", "null"]},
+        "entry_id": {"type": ["string", "null"]},
+        "field": {"type": ["string", "null"]},
+        "fix_hint": {"type": ["string", "null"]}
+      }
+    }
+  }
+}

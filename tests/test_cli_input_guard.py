@@ -25,11 +25,12 @@ from pathlib import Path
 import jsonschema
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-VALIDATE = REPO_ROOT / "skills" / "legitimate-interest" / "validator" / "validate.py"
+from conftest import find_schema
+
+SKILL_ROOT = Path(__file__).resolve().parents[1]
+VALIDATE = SKILL_ROOT / "validator" / "validate.py"
 ARTEFACT_SCHEMA = json.loads(
-    (REPO_ROOT / "docs" / "standards" / "schemas"
-     / "skill-artefact-1.1.schema.json").read_text(encoding="utf-8"))
+    find_schema("skill-artefact-1.1.schema.json").read_text(encoding="utf-8"))
 
 
 def run_cli(*argv):

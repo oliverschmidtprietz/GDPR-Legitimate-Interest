@@ -12,13 +12,14 @@ from pathlib import Path
 
 import jsonschema
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-VALIDATE = REPO_ROOT / "skills" / "legitimate-interest" / "validator" / "validate.py"
-FIXTURE = (REPO_ROOT / "skills" / "legitimate-interest" / "validator" / "fixtures"
+from conftest import find_schema
+
+SKILL_ROOT = Path(__file__).resolve().parents[1]
+VALIDATE = SKILL_ROOT / "validator" / "validate.py"
+FIXTURE = (SKILL_ROOT / "validator" / "fixtures"
            / "must_pass" / "minimal-clean.json")
 ARTEFACT_SCHEMA = json.loads(
-    (REPO_ROOT / "docs" / "standards" / "schemas"
-     / "skill-artefact-1.1.schema.json").read_text(encoding="utf-8"))
+    find_schema("skill-artefact-1.1.schema.json").read_text(encoding="utf-8"))
 
 
 def run_cli(*argv):

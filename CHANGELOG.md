@@ -6,6 +6,21 @@ Format: `## [vX.Y] — YYYY-MM-DD`
 
 ---
 
+## [v1.4] — 2026-10-31
+
+Bundled tests made portable to the standalone public copy (`scripts/stage-public-copy.sh`
++ `scripts/check-public-portability.sh`). No change to the Art. 6(1)(f) method, gates, or
+templates.
+
+- **`tests/conftest.py` extended with `find_schema()`**, which locates a shared
+  portfolio schema (`docs/standards/schemas/*.schema.json`) by walking up from the test
+  file's own location — works identically whether the schemas sit at the monorepo root
+  or at the root of a flat public copy (the staging script now copies them there).
+  `test_cli_input_guard.py`, `test_emit_core_artefact.py`, and
+  `test_emit_core_artefact_malformed.py` use it, and now derive the skill's own paths
+  (`SKILL_ROOT`) from the test file's own location, instead of a hard-coded
+  `REPO_ROOT`, which only resolved correctly inside the monorepo.
+
 ## [v1.3] — 2026-10-02
 
 Break-it test 2026-10-02 fixes (`scratchpad/breakit/legitimate-interest/p1-p12`,
